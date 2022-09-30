@@ -1,7 +1,8 @@
 package com.example.springrestdb.controller;
 
 import com.example.springrestdb.model.Objective;
-import com.example.springrestdb.repository.ObjectiveRepository;
+import com.example.springrestdb.repository.KeyResultCrudRepository;
+import com.example.springrestdb.repository.ObjectiveCrudRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +17,20 @@ public class ObjectiveController {
     private static final Logger LOG = LoggerFactory.getLogger(ObjectiveController.class);
 
     @Autowired
-    ObjectiveRepository objectiveRepository;
+    ObjectiveCrudRepository objectiveCrudRepository;
+    @Autowired
+    KeyResultCrudRepository keyResultCrudRepository;
 
     @GetMapping("")
     public List<Objective> getAllObjectives() {
         LOG.info("Get all objectives");
-        return (List<Objective>) objectiveRepository.findAll();
+        return (List<Objective>) objectiveCrudRepository.findAll();
     }
 
     @GetMapping("{id}")
     public Optional<Objective> getObjective(@PathVariable long id) {
         LOG.info("getAllObjectives with id '{}'", id);
-        return objectiveRepository.findById(id);
+        return objectiveCrudRepository.findById(id);
     }
 
     @GetMapping({"findByName/{name}", "findByNameAndOrganisation/{name}/{organisation}"})
@@ -38,7 +41,18 @@ public class ObjectiveController {
         } else {
             LOG.info("find Objectives with name '{}'", name);
         }
-        // Find only by name
-        return objectiveRepository.findByName(name);
+        return objectiveCrudRepository.findByName(name);
+    }
+
+    @GetMapping("findByEvenId")
+    public List<Objective> findByEvenId() {
+        LOG.info("findByEvenId");
+        return objectiveCrudRepository.findByEvenId();
+    }
+
+    @GetMapping("findByOddId")
+    public List<Objective> findByOddId() {
+        LOG.info("findByOddId");
+        return objectiveCrudRepository.findByOddId();
     }
 }

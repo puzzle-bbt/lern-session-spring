@@ -12,7 +12,20 @@ public class Objective {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    public long getId() {
+        return id;
+    }
+
     private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -27,11 +40,11 @@ public class Objective {
         return Objects.hash(id);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String toString() {
+        return "Objective{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
