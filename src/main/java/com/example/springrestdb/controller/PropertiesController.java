@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api")
-public class RootController {
+@RequestMapping("api/properties")
+public class PropertiesController {
 
     @Autowired
     ExampleProperties exampleProperties;
@@ -23,7 +23,7 @@ public class RootController {
     @Autowired
     ExampleService exampleService;
 
-    private static final Logger LOG = LoggerFactory.getLogger(RootController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PropertiesController.class);
 
     @GetMapping("string")
     @ResponseBody
